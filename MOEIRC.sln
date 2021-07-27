@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOEIRC", "MOEIRC\MOEIRC.csproj", "{D7D58C84-7B53-4F75-A2B0-D0D2EE4DBBD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOEIRCNet", "MOEIRC\MOEIRCNet.csproj", "{D7D58C84-7B53-4F75-A2B0-D0D2EE4DBBD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOEIRCTests", "MOEIRCTests\MOEIRCTests.csproj", "{BB504C38-EEEC-4077-9463-778D26E842D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOEIRCTests", "MOEIRCTests\MOEIRCTests.csproj", "{BB504C38-EEEC-4077-9463-778D26E842D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

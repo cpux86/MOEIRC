@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MOEIRC.API.Payload
+namespace MOEIRCNet.API.Payload
 {
     class CredentialsPayload
     {

@@ -1,15 +1,18 @@
 using System;
 using Xunit;
-using MOEIRC.API;
+using System.Threading.Tasks;
+using MOEIRCNet;
 
 namespace MOEIRCTests
 {
     public class AuthTest
     {
         [Fact]
-        public void Test1()
+        public async Task Test1()
         {
-            var moeirc = Rest.GetCredentials("https://my.mosenergosbyt.ru","cpux86@mail.ru","");
+            var moeirc = new MOEIRCNet.MOEIRC("cpux86@mail.ru", "J8aS_8AD*fRp$e3");
+            var res = await moeirc.GetCredentials();
+
         }
     }
 }

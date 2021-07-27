@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MOEIRC.Constants
+namespace MOEIRCNet.Constants
 {
     internal static class URLs
     {

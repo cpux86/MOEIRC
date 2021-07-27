@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading.Tasks;
+using MOEIRCNet.Constants;
 
-namespace MOEIRC
+namespace MOEIRCNet
 {
     public class MOEIRC
     {
@@ -14,5 +16,9 @@ namespace MOEIRC
             this.Password = password;
         }
 
+        public async Task<string> GetCredentials()
+        {
+            return await API.Rest.GetCredentials(URLs.GetApiUrl(),Login, Password);
+        }
     }
 }
