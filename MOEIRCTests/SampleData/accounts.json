@@ -1,0 +1,53 @@
+{
+  "success": true,
+  "total": 2,
+  "data": [
+    {
+      "nn_ls": "34324828",
+      "nm_ls_group_full": "142032, МОСКОВСКАЯ ОБЛ., Г.О. ДОМОДЕДОВО Р-Н., С.ДОМОДЕДОВО, ВЫСОТНАЯ, д.1, кв.352",
+      "nm_type": "ЕПД",
+      "nm_provider": "ООО \"МосОблЕИРЦ\"",
+      "kd_provider": 2,
+      "vl_provider": "{\"id_abonent\": 8171373}",
+      "id_service": 10053165,
+      "nm_ls_group": "ВЫСОТНАЯ, д.1, кв.352",
+      "data": {
+        "id_tu": 39,
+        "NN_SNILS": "13612025814",
+        "nm_street": "ВЫСОТНАЯ, д.1, кв.352",
+        "nn_ls_disp": "34324828",
+        "KD_LS_OWNER_TYPE": 1
+      },
+      "pr_ls_group_edit": true,
+      "nm_lock_msg": null,
+      "kd_status": 1,
+      "kd_service_type": 2,
+      "nm_ls_description": null
+    },
+    {
+      "nn_ls": "30723-352-05",
+      "nm_ls_group_full": "Домодедово с., Высотная ул., д.1, кв.352",
+      "nm_type": "Электроэнергия",
+      "nm_provider": "АО \"Мосэнергосбыт\"",
+      "kd_provider": 1,
+      "vl_provider": "{\"id_kng\": 142638, \"nm_abn\": 352}",
+      "id_service": 12212679,
+      "nm_ls_group": "Высотная ул., д. 1, кв. 352",
+      "data": {
+        "kd_reg": 51,
+        "NN_SNILS": "13612025814",
+        "nm_street": "Высотная ул., д. 1, кв. 352",
+        "nn_ls_disp": "30723-352-05",
+        "KD_LS_OWNER_TYPE": 1
+      },
+      "pr_ls_group_edit": true,
+      "nm_lock_msg": null,
+      "kd_status": 1,
+      "kd_service_type": 1,
+      "nm_ls_description": null
+    }
+  ],
+  "metaData": {
+    "responseTime": 0.004
+  }
+}

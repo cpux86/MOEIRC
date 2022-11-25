@@ -4,11 +4,13 @@ using System.Text;
 
 namespace MOEIRCNet.Constants
 {
-    internal static class URLs
+    public static class URLs
     {
+        public const string API_URL =  "https://my.mosenergosbyt.ru/gate_lkcomu";
+        public const string AUTH_ENDPOINT = "https://my.mosenergosbyt.ru/auth";
         public static string GetApiUrl()
         {
-            return $"https://my.mosenergosbyt.ru";
+            return $"https://my.mosenergosbyt.ru/gate_lkcomu";
         }
     }
 }
