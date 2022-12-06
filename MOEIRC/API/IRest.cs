@@ -9,8 +9,8 @@ namespace MOEIRCNet.API
     public interface IRest
     {
         public Task<string> GetAccountsAsync(string url, string accessToken);
-        public Task<string> GetCredentialsAsync(string url, string login, string password);
-        public Task<string> GetCountersAsync(UserInfo clientId, string accessToken);
+        public Task<string> LoginAsync(string url, string login, string password);
+        public Task<string> GetCountersAsync(Abonent clientId, string accessToken);
         public Task LogOutAsync(string accessToken);
 
         //public Task SendCurrentValue();

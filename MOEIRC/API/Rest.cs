@@ -15,7 +15,7 @@ namespace MOEIRCNet.API
 {
     public class Rest : RestBase, IRest
     {
-        public async Task<string> GetCredentialsAsync(string url, string login, string password)
+        public async Task<string> LoginAsync(string url, string login, string password)
         {
             
             //var client = new RestClient(url)
@@ -69,7 +69,7 @@ namespace MOEIRCNet.API
             return response.Content;
         }
 
-        public async Task<string> GetCountersAsync(UserInfo clientId, string accessToken)
+        public async Task<string> GetCountersAsync(Abonent clientId, string accessToken)
         {
             var client = new RestClient(URLs.API_URL)
             {
@@ -99,6 +99,10 @@ namespace MOEIRCNet.API
             request.AddQueryParameter("action", "sql");
             request.AddQueryParameter("query", "AbonentSaveIndication");
             request.AddQueryParameter("session", accessToken);
+
+            request.AddParameter("plugin", "propagateMoeInd");
+            request.AddParameter("pr_skip_anomaly", 0);
+            request.AddParameter("pr_skip_err", 0);
 
             request.AddObject(payload);
 

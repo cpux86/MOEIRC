@@ -1,28 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using Newtonsoft.Json;
 
-namespace MOEIRCNet.API.Responses
+namespace MOEIRCNet.API.Responses.Counters
 {
-
-
-    public class GetCountersResponse
-    {
-        public bool success { get; set; }
-        public int total { get; set; }
-        public Counter[] data { get; set; }
-        //public Metadata metaData { get; set; }
-    }
-
-    //public class Metadata
-    //{
-    //    public int smorodinaCode { get; set; }
-    //    public string smorodinaMsg { get; set; }
-    //    public float responseTime { get; set; }
-    //}
-
-    public class Counter
+    public class CounterResponse
     {
         public int id_counter { get; set; }
         public int id_pu { get; set; }
@@ -43,7 +26,7 @@ namespace MOEIRCNet.API.Responses
         /// Дата и время передачи показаний счетчика 
         /// </summary>
         [JsonProperty("dt_indication")]
-        public DateTime DateTimeIndication { get; set; } 
+        public DateTime DateTimeIndication { get; set; }
 
         public string id_counter_zn { get; set; }
 
@@ -60,13 +43,16 @@ namespace MOEIRCNet.API.Responses
         /// </summary>
         [JsonProperty("nm_service")]
         public string ServiceName { get; set; }
+
+        //[JsonProperty("nn_pu")]
+        //public int ServiceProvider { get; set; }
+
         /// <summary>
         /// Наименование поставщика услуг
         /// </summary>
-        [JsonProperty("nn_pu")]
-        public int ServiceProvider { get; set; }
-        
-        public string nm_pu { get; set; }
+        [JsonProperty("nm_pu")]
+        public string ServiceProvider { get; set; }
+
         public string nm_measure_unit { get; set; }
         /// <summary>
         /// Последние показания счетчика
@@ -91,11 +77,9 @@ namespace MOEIRCNet.API.Responses
         /// </summary>
         [JsonProperty("dt_mpi")]
         public string NextVerificationData { get; set; }
-        
+
         //public object vl_tarif { get; set; }
         //public int pr_state { get; set; }
         //public int pr_remotely { get; set; }
     }
-
-
 }

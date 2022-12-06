@@ -5,10 +5,10 @@ using System.Text;
 
 namespace MOEIRCNet.Classes
 {
-    public class UserInfo
+    public class Abonent
     {
         [JsonProperty("id_abonent")]
-        public int AbonentId { get; set; }
+        public int Id { get; private set; }
         public string ToJson() => JsonConvert.SerializeObject(this);
     }
 
