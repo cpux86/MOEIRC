@@ -1,6 +1,7 @@
 ﻿using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +10,10 @@ using MOEIRCNet.API.Responses;
 using MOEIRCNet.Classes;
 using MOEIRCNet.Constants;
 using Newtonsoft.Json;
-using static System.Collections.Specialized.BitVector32;
+using System.Runtime.Intrinsics.X86;
+using System.Net;
+using System.Net.Mime;
+using ContentType = RestSharp.Serializers.ContentType;
 
 namespace MOEIRCNet.API
 {
@@ -17,67 +21,53 @@ namespace MOEIRCNet.API
     {
         public async Task<string> LoginAsync(string url, string login, string password)
         {
-            
-            //var client = new RestClient(url)
-            //{
-            //    UserAgent = AppDate.USER_AGENT,
-            //    CookieContainer = new System.Net.CookieContainer()
-            //};
-
             //var body = new Payload.CredentialsPayload(login, password);
             var payLoad = JsonConvert.SerializeObject(new AppDate());
 
-            //var request = new RestRequest("gate_lkcomu", Method.POST);
-            var Request = new RestRequest(Method.POST);
+            var Request = new RestRequest()
+            {
+                Timeout = 1000
+            };
+            
             //request.AddParameter("login", login);
             //request.AddParameter("psw", password);
 
             Request.AddObject(new { login = login, psw = password });
-            
-
             Request.AddParameter("vl_device_info", payLoad);
-            Request.AddCookie("session-cookie", "1695e9c2b31f6ecaa28964d4beb261f5288e30a1b633d252854f28b99959934dd03e8a59ddbb61a04c3d7010b2bb292b");
+            //Request.AddCookie("session-cookie", "1695e9c2b31f6ecaa28964d4beb261f5288e30a1b633d252854f28b99959934dd03e8a59ddbb61a04c3d7010b2bb292b");
 
-            //request.AddParameter("action", "auth",ParameterType.QueryString);
             Request.AddQueryParameter("action", "auth");
             Request.AddHeader("Referer", URLs.AUTH_ENDPOINT);
             
             var cancellationTokenSource = new CancellationTokenSource();
-            var response = await Client.ExecuteAsync(Request, cancellationTokenSource.Token);
+
+            var response = await Client.PostAsync(Request, cancellationTokenSource.Token);
+
+            // если сервер вернул ошибку
+            if (response.ResponseStatus == ResponseStatus.Error) throw new Exception("Resource not fount");
+            if (response.ContentType != ContentType.Json) throw new Exception("Bad request");
 
             return response.Content;
 
         }
         // получить лицевой счет
-        // здесь нудно получить id_abonent
+        // здесь нужно получить id_abonent
         public async Task<string> GetAccountsAsync(string url, string accessToken)
         {
-            var client = new RestClient(url)
-            {
-                UserAgent = AppDate.USER_AGENT,
-                CookieContainer = new System.Net.CookieContainer()
-            };
-
-            var request = new RestRequest(Method.POST);
+            var request = new RestRequest();
             request.AddParameter("action", "sql", ParameterType.QueryString);
             request.AddParameter("query", "LSList", ParameterType.QueryString);
             request.AddParameter("session", accessToken, ParameterType.QueryString);
-
+            
             var cancellationTokenSource = new CancellationTokenSource();
-            var response = await client.ExecuteAsync(request, cancellationTokenSource.Token);
+            var response = await Client.PostAsync(request, cancellationTokenSource.Token);
 
             return response.Content;
         }
 
         public async Task<string> GetCountersAsync(Abonent clientId, string accessToken)
         {
-            var client = new RestClient(URLs.API_URL)
-            {
-                UserAgent = AppDate.USER_AGENT,
-                CookieContainer = new System.Net.CookieContainer()
-            };
-
-            var request = new RestRequest(Method.POST);
+            var request = new RestRequest();
             request.AddParameter("plugin", "smorodinaTransProxy");
             request.AddParameter("proxyquery", "AbonentEquipment");
             request.AddParameter("vl_provider", clientId.ToJson());
@@ -87,15 +77,14 @@ namespace MOEIRCNet.API
             request.AddParameter("session", accessToken, ParameterType.QueryString);
 
             var cancellationTokenSource = new CancellationTokenSource();
-            var response = await client.ExecuteAsync(request, cancellationTokenSource.Token);
-
+            var response = await Client.ExecuteAsync(request, cancellationTokenSource.Token);
 
             return response.Content;
         }
 
         public async Task SendCurrentValueAsync(SendCounterValueRequest payload, string accessToken)
         {
-            var request = new RestRequest(Method.POST);
+            var request = new RestRequest();
             request.AddQueryParameter("action", "sql");
             request.AddQueryParameter("query", "AbonentSaveIndication");
             request.AddQueryParameter("session", accessToken);
@@ -107,18 +96,19 @@ namespace MOEIRCNet.API
             request.AddObject(payload);
 
             var cancellationTokenSource = new CancellationTokenSource();
-            var response = await Client.ExecuteAsync(request, cancellationTokenSource.Token);
+            var response = await Client.PostAsync(request, cancellationTokenSource.Token);
         }
 
         public async Task LogOutAsync(string accessToken)
         {
-            var request = new RestRequest(Method.POST);
+            var request = new RestRequest();
             request.AddQueryParameter("action", "invalidate");
             request.AddQueryParameter("query", "ProfileExit");
             request.AddQueryParameter("session", accessToken);
 
             var cancellationTokenSource = new CancellationTokenSource();
-            var response = await Client.ExecuteAsync(request, cancellationTokenSource.Token);
+            var response = await Client.PostAsync(request, cancellationTokenSource.Token);
         }
+
     }
 }

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using MOEIRCNet.API.ExceptionExtensions;
+using MOEIRCNet.API.Request;
 using MOEIRCNet.API.Responses;
 using MOEIRCNet.API.Responses.Accounts;
 using MOEIRCNet.API.Responses.Counters;
@@ -15,9 +18,11 @@ using Newtonsoft.Json.Converters;
 
 namespace MOEIRCNet.API
 {
+
     public class Api : IApi
     {
         private readonly IRest _rest;
+        private Account _account;
 
         public Api(IRest rest)
         {
@@ -36,11 +41,13 @@ namespace MOEIRCNet.API
             };
         }
 
-        public async Task<Account> GetAccountAsync(string session)
+        public async Task<Account> GetAccountAsync(Session session)
         {
-            var accountsJson = await _rest.GetAccountsAsync(URLs.API_URL, session);
+            if (!session.IsValid) throw new Exception("Session Invalid");
+
+            var accountsJson = await _rest.GetAccountsAsync(URLs.API_URL, session.SessionId);
             var accountsObject = JsonConvert.DeserializeObject<GetAccountsResponse>(accountsJson);
-            var account = accountsObject?.Accounts
+            _account = accountsObject?.Accounts
                 .Where(type => type.nm_type == "ЕПД")
                 .Select(acc => new Account(_rest, session)
                 {
@@ -52,13 +59,20 @@ namespace MOEIRCNet.API
 
                 }).FirstOrDefault() ?? throw new BadServerProviderException("Не верный ответ сервера");
 
-            return account;
+            return _account;
         }
 
-        public async Task GetCountersAsync(Abonent abonent, string session)
+        public async Task Send(Counter counter, Session session)
         {
-            //var countersJson = await _rest.GetCountersAsync(abonent, session);
-            //var countersObject = JsonConvert.DeserializeObject<GetCountersResponse>(countersJson);
+            var request = new SendCounterValueRequest
+            {
+                id_counter = counter.CounterId,
+                id_source = counter.ProviderId,
+                id_counter_zn = "1",
+                vl_indication = counter.OldCounterValue.ToString(CultureInfo.GetCultureInfo("en-US")),
+                vl_provider = _account.Abonent.ToJson()
+            };
+            await _rest.SendCurrentValueAsync(request, session.SessionId);
         }
 
     }

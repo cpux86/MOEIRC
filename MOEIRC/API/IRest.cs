@@ -1,4 +1,5 @@
-﻿using MOEIRCNet.Classes;
+﻿using MOEIRCNet.API.Request;
+using MOEIRCNet.Classes;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,6 @@ namespace MOEIRCNet.API
         public Task<string> GetCountersAsync(Abonent clientId, string accessToken);
         public Task LogOutAsync(string accessToken);
 
-        //public Task SendCurrentValue();
+        public Task SendCurrentValueAsync(SendCounterValueRequest payload, string accessToken);
     }
 }

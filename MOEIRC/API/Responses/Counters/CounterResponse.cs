@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MOEIRCNet.Classes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,8 +8,15 @@ namespace MOEIRCNet.API.Responses.Counters
 {
     public class CounterResponse
     {
-        public int id_counter { get; set; }
-        public int id_pu { get; set; }
+        //public int id_counter { get; set; }
+        [JsonProperty("id_counter")]
+        public int CounterId { get; set; }
+
+        /// <summary>
+        /// Id поставщика услуг 
+        /// </summary>
+        [JsonProperty("id_pu")]
+        public int ProviderId { get; set; }
         /// <summary>
         /// Номер счетчика
         /// </summary>
@@ -17,16 +25,16 @@ namespace MOEIRCNet.API.Responses.Counters
         //public object id_indication { get; set; }
 
         /// <summary>
-        /// Показания счетчика
+        /// Учтенные показания счетчика за предыдущий месяц
         /// </summary>
         [JsonProperty("vl_indication")]
-        public float CounterValue { get; private set; }
+        public float OldCounterValue { get; set; }
 
         /// <summary>
-        /// Дата и время передачи показаний счетчика 
+        /// Дата и время передачи показаний счетчика в прошлом месяце
         /// </summary>
         [JsonProperty("dt_indication")]
-        public DateTime DateTimeIndication { get; set; }
+        public DateTime DateOldCounterValue { get; set; }
 
         public string id_counter_zn { get; set; }
 
@@ -55,20 +63,28 @@ namespace MOEIRCNet.API.Responses.Counters
 
         public string nm_measure_unit { get; set; }
         /// <summary>
-        /// Последние показания счетчика
+        /// Последние переданные показания
         /// </summary>
         [JsonProperty("vl_last_indication")]
         public float LastCounterValue { get; set; }
 
         /// <summary>
-        /// дата последней передачи показаний
+        /// Дата и время передачи последних показаний счетчика
         /// </summary>
         [JsonProperty("dt_last_indication")]
-        public DateTime LastIndication { get; set; }
-
+        public DateTime DateLastCounterValue { get; set; }
+        /// <summary>
+        /// Начало периода приема показаний счетчика
+        /// </summary>
         public int nn_ind_receive_start { get; set; }
+        /// <summary>
+        /// Окончание периода приема показаний счетчика
+        /// </summary>
         public int nn_ind_receive_end { get; set; }
         //public long id_billing_counter { get; set; }
+        /// <summary>
+        /// Количество разрядов счетчика
+        /// </summary>
         public float vl_sh_znk { get; set; }
         //public object nm_no_access_reason { get; set; }
 
@@ -78,8 +94,12 @@ namespace MOEIRCNet.API.Responses.Counters
         [JsonProperty("dt_mpi")]
         public string NextVerificationData { get; set; }
 
+
         //public object vl_tarif { get; set; }
+        /// Статус профиля
         //public int pr_state { get; set; }
+        /// Профиль удален
         //public int pr_remotely { get; set; }
     }
+
 }

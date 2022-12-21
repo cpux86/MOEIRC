@@ -16,7 +16,8 @@ namespace MOEIRCNet.API.Request
 
         //id_pu -> id_source
         public int id_source { get; set; }
-        public float vl_indication { get; set; }
+        //public float vl_indication { get; set; }
+        public string vl_indication { get; set; }
         public string vl_provider { get; set; }
     }
 

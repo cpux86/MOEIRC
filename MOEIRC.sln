@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30907.101
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOEIRCNet", "MOEIRC\MOEIRCNet.csproj", "{D7D58C84-7B53-4F75-A2B0-D0D2EE4DBBD6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOEIRCTests", "MOEIRCTests\MOEIRCTests.csproj", "{BB504C38-EEEC-4077-9463-778D26E842D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartCounter", "src\SmartCounter\SmartCounter.csproj", "{A9BF4178-A3E3-479B-96F5-E50AF7351189}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{BB504C38-EEEC-4077-9463-778D26E842D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB504C38-EEEC-4077-9463-778D26E842D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB504C38-EEEC-4077-9463-778D26E842D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9BF4178-A3E3-479B-96F5-E50AF7351189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9BF4178-A3E3-479B-96F5-E50AF7351189}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9BF4178-A3E3-479B-96F5-E50AF7351189}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9BF4178-A3E3-479B-96F5-E50AF7351189}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

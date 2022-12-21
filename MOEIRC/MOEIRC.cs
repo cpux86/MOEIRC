@@ -37,16 +37,16 @@ namespace MOEIRCNet
 
 
 
-        public MOEIRC(string login, string password, IRest rest)
-        {
-            this._login = login;
-            this._password = password;
-            api = rest;
-            Credentials = GetCredentials().Result;
-            UserInfo = GetAccounts().Result;
-            Counters = GetCountersList().Result;
+        //public MOEIRC(string login, string password, IRest rest)
+        //{
+        //    this._login = login;
+        //    this._password = password;
+        //    api = rest;
+        //    Credentials = GetCredentials().Result;
+        //    UserInfo = GetAccounts().Result;
+        //    Counters = GetCountersList().Result;
 
-        }
+        //}
 
         private void Init()
         {
@@ -78,19 +78,19 @@ namespace MOEIRCNet
             return Credentials;
         }
 
-        public async Task<IEnumerable<CounterResponse>> GetCountersList()
-        {
-            //await this.GetCredentials();
-            //await this.GetAccounts();
-            var res = await api.GetCountersAsync(this.UserInfo, this.Credentials.Session);
-            var countersResponse = JsonConvert.DeserializeObject<GetCountersResponse>(res);
-            //test
+        //public async Task<IEnumerable<CounterResponse>> GetCountersList()
+        //{
+        //    //await this.GetCredentials();
+        //    //await this.GetAccounts();
+        //    var res = await api.GetCountersAsync(this.UserInfo, this.Credentials.Session);
+        //    var countersResponse = JsonConvert.DeserializeObject<GetCountersResponse>(res);
+        //    //test
             
-            Counters = countersResponse.data.Where(c => c.nm_measure_unit == "м3").ToList<CounterResponse>();
+        //    Counters = countersResponse.data.Where(c => c.nm_measure_unit == "м3").ToList<CounterResponse>();
            
             
-            return Counters;
-        }
+        //    return Counters;
+        //}
 
         public async Task<CounterResponse> GetCounterByNumber(string id)
         {

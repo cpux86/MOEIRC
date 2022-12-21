@@ -2,6 +2,7 @@
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 
 namespace MOEIRCNet.API
@@ -14,11 +15,15 @@ namespace MOEIRCNet.API
         {
             get
             {
-                // implementation pattern singleton 
-                _client = _client ?? new RestClient(URLs.API_URL)
+                //implementation pattern singleton
+                _client ??= new RestClient(URLs.API_URL)
                 {
-                    UserAgent = AppDate.USER_AGENT,
-                    CookieContainer = new System.Net.CookieContainer()
+                    Options =
+                        {
+                            UserAgent = AppDate.USER_AGENT,
+                            ThrowOnAnyError = true,
+                            CookieContainer = new System.Net.CookieContainer()
+                        },
                 };
                 return _client;
             }

@@ -9,8 +9,12 @@ namespace MOEIRCNet.Classes.Extensions
     {
         public static Counter GetCounterById(this IEnumerable<Counter> counters, string counterId)
         {
-            return counters.FirstOrDefault(c => c.CounterNumber == counterId) ??
-                   throw new Exception("Counter not fount");
+            return counters.FirstOrDefault(c => c.CounterNumber == counterId) ?? throw new Exception("Counter not fount");
+        }
+
+        public static void Save(this IEnumerable<Counter> counters)
+        {
+            
         }
     }
 }
